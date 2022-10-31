@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">SmartAlert</string>
+    <string name="type_info">Please enter your information!</string>
+    <string name="description">Description</string>
+    <string name="upload_img">Upload Image</string>
+    <string name="spinner_text">Categories</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="src_btn_text">Filter by Category</string>
+    <string name="signup_btn_text">Sign Up</string>
+    <string name="login_btn_text">Login</string>
+    <string name="welcome_text">Welcome to our application!
+        You can sign in by entering a username and a password,
+        or you can login if you already own an account!</string>
+    <string name="username">Enter a username</string>
+    <string name="password">Enter password here</string>
+    <string name="view_reps">View Reports</string>
+    <string name="view_map">View Map</string>
+    <string name="goto_map">Open Map</string>
+    <string name="goto_statistics">View Statistics</string>
+    <string name="alreadyUser">Already a user? Click the button below to login!</string>
+    <string name="upload_inc">Upload Incident</string>
+    <string name="logout">Logout</string>
+    <string name="view_critical">View critical incidents and send notifications</string>
+    <string name="edit_users">Edit user role</string>
+</resources>

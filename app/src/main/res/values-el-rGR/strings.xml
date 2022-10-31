@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SmartAlert</string>
+    <string name="type_info">Παρακαλώ εισαγάγετε τα στοιχεία σας</string>
+    <string name="description">Περιγραφή</string>
+    <string name="upload_img">Μεταφόρτωση εικόνας</string>
+    <string name="spinner_text">Κατηγορίες</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="src_btn_text">Φιλτράρισμα ανά κατηγορία</string>
+    <string name="signup_btn_text">Εγγραφή</string>
+    <string name="login_btn_text">Είσοδος</string>
+    <string name="username">Εισαγωγή username</string>
+    <string name="password">Εισαγωγή κωδικού πρόσβασης</string>
+    <string name="view_reps">Προβολή αναφοράς</string>
+    <string name="view_map">Προβολή χάρτη</string>
+    <string name="welcome_text">Καλωσήρθατε στην εφαρμογή μας!</string>
+    <string name="goto_map">Μετάβαση σε χάρτη</string>
+    <string name="goto_statistics">Προβολή στατιστικών</string>
+    <string name="alreadyUser">Είσαι ήδη χρήστης; Κάνε κλίκ στο κάτωθι για είσοδο!</string>
+    <string name="upload_inc">Καταγραφή συμβάντος</string>
+    <string name="logout">Έξοδος</string>
+    <string name="view_critical">Προβολή κρίσιμων καταστάσεων και αποστολή ειδοποιήσεων</string>
+    <string name="edit_users">Επεξεργασία ρόλων</string>
+</resources>
