@@ -19,6 +19,10 @@ import com.example.androidprotalfinal.implementation.FirebaseInstance;
 import com.example.androidprotalfinal.interfaces.ConsumeEndpoints;
 import com.example.androidprotalfinal.models.JWTTokenResponse;
 import com.example.androidprotalfinal.models.User;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,6 +50,9 @@ public class LoginSignupActivity extends AppCompatActivity {
                             Manifest.permission.ACCESS_COARSE_LOCATION}, 123);
             return;
         }
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
     }
     public void signup(){
         try {
@@ -59,7 +66,7 @@ public class LoginSignupActivity extends AppCompatActivity {
                         Extensions.show(LoginSignupActivity.this,"Successfully signed up");
                     } catch (Exception e) {
                         e.printStackTrace();
-                        Extensions.show(LoginSignupActivity.this,e.getMessage());
+                        Extensions.show(LoginSignupActivity.this,"unexpected error!");
                     }
                 }
 
@@ -73,7 +80,7 @@ public class LoginSignupActivity extends AppCompatActivity {
             getAuthenticationToken(new User(user.getUsername(),user.getPassword()));
         } catch (Exception e) {
             e.printStackTrace();
-            Extensions.show(LoginSignupActivity.this,e.getMessage());
+            Extensions.show(LoginSignupActivity.this,"unexpected error!");
         }
 
     }
@@ -101,7 +108,7 @@ public class LoginSignupActivity extends AppCompatActivity {
                 try {
                     Log.d("TAG", response.code() + "");
                     JWTTokenResponse resource = response.body();
-                    String token = resource.Token;
+                    String token = Objects.requireNonNull(resource).Token;
                     String username = resource.Username;
                     String role = resource.Role;
                     SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
@@ -117,14 +124,13 @@ public class LoginSignupActivity extends AppCompatActivity {
                     System.out.println("ROLE " + role);
                     if (role.equals("admin")) {
                         startActivity(new Intent(LoginSignupActivity.this, AdminPortalActivity.class));
-                        Extensions.show(LoginSignupActivity.this,"logged in!");
                     } else {
                         startActivity(new Intent(LoginSignupActivity.this, UsersPortalActivity.class));
-                        Extensions.show(LoginSignupActivity.this,"logged in!");
                     }
+                    Extensions.show(LoginSignupActivity.this,"logged in!");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Extensions.show(LoginSignupActivity.this,e.getMessage());
+                    Extensions.show(LoginSignupActivity.this,"error!");
                 }
             }
 

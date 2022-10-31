@@ -70,7 +70,7 @@ public class UploadActivity extends AppCompatActivity {
             i.setAction(Intent.ACTION_GET_CONTENT);
             launchUploadActivity.launch(i);
         } catch (Exception e) {
-            Extensions.show(this, e.getMessage());
+            Extensions.show(this, "error");
         }
     }
 
@@ -125,7 +125,7 @@ public class UploadActivity extends AppCompatActivity {
 
                         } catch (Exception ex) {
                             ex.printStackTrace();
-                            Extensions.show(UploadActivity.this,ex.getMessage());
+                            Extensions.show(UploadActivity.this,"error");
                         }
                     } else {
                         Extensions.show(this, "Error with input data");
@@ -152,7 +152,7 @@ public class UploadActivity extends AppCompatActivity {
             information.setImagePath(imgPath);
             information.setLocality(addressList.get(0).getLocality());
         } catch (Exception e) {
-            Extensions.show(this, e.getMessage());
+            Extensions.show(this, "error");
         }
         return information;
     }

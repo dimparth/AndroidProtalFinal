@@ -87,12 +87,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 @Override
                 public void onFailure(Call<IncidentsList> call, Throwable t) {
 
-                    Extensions.show(MapsActivity.this,t.getMessage());
+                    Extensions.show(MapsActivity.this,"error");
                 }
             });
         }catch (Exception e){
             e.printStackTrace();
-            Extensions.show(MapsActivity.this,e.getMessage());
+            Extensions.show(MapsActivity.this,"error");
         }
     }
 }
