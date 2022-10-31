@@ -1,9 +1,12 @@
 package com.example.androidprotalfinal.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +36,16 @@ public class LoginSignupActivity extends AppCompatActivity {
         usernameInput = findViewById(R.id.usernameLogin_input);
         passwordInput = findViewById(R.id.passwordLogin_input);
         apiInterface = APIClient.getClient().create(ConsumeEndpoints.class);
+        if (ActivityCompat.checkSelfPermission
+                (this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION}, 123);
+            return;
+        }
     }
     public void signup(){
         try {
@@ -43,8 +56,10 @@ public class LoginSignupActivity extends AppCompatActivity {
                 public void onResponse(Call<String> call, Response<String> response) {
                     try {
                         Log.d("TAG", response.code() + "");
+                        Extensions.show(LoginSignupActivity.this,"Successfully signed up");
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Extensions.show(LoginSignupActivity.this,e.getMessage());
                     }
                 }
 
@@ -58,6 +73,7 @@ public class LoginSignupActivity extends AppCompatActivity {
             getAuthenticationToken(new User(user.getUsername(),user.getPassword()));
         } catch (Exception e) {
             e.printStackTrace();
+            Extensions.show(LoginSignupActivity.this,e.getMessage());
         }
 
     }
@@ -101,11 +117,14 @@ public class LoginSignupActivity extends AppCompatActivity {
                     System.out.println("ROLE " + role);
                     if (role.equals("admin")) {
                         startActivity(new Intent(LoginSignupActivity.this, AdminPortalActivity.class));
+                        Extensions.show(LoginSignupActivity.this,"logged in!");
                     } else {
                         startActivity(new Intent(LoginSignupActivity.this, UsersPortalActivity.class));
+                        Extensions.show(LoginSignupActivity.this,"logged in!");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    Extensions.show(LoginSignupActivity.this,e.getMessage());
                 }
             }
 

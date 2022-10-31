@@ -81,13 +81,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                             .get()
                                             .longitude))));
                     mMap.animateCamera(CameraUpdateFactory.zoomIn());
+                    Extensions.show(MapsActivity.this,"Map initialized! Viewing all incidents!");
                 }
 
                 @Override
                 public void onFailure(Call<IncidentsList> call, Throwable t) {
 
+                    Extensions.show(MapsActivity.this,t.getMessage());
                 }
             });
-        }catch (Exception e){e.printStackTrace();}
+        }catch (Exception e){
+            e.printStackTrace();
+            Extensions.show(MapsActivity.this,e.getMessage());
+        }
     }
 }

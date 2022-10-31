@@ -3,10 +3,13 @@ package com.example.androidprotalfinal.activities;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -47,6 +50,16 @@ public class UploadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_upload);
         Spinner spinner = findViewById(R.id.issues_spinner);
         spinner.setAdapter(Extensions.populateSpinner(this, R.array.categories_array));
+        if (ActivityCompat.checkSelfPermission
+                (this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION}, 123);
+            return;
+        }
         apiInterface = APIClient.getClient().create(ConsumeEndpoints.class);
     }
 
@@ -93,9 +106,11 @@ public class UploadActivity extends AppCompatActivity {
                                 public void onResponse(Call<String> call, Response<String> response) {
                                     try {
                                         Log.d("TAG", response.code() + "");
+                                        Extensions.show(UploadActivity.this,"Uploaded! Viewing map!");
                                         startActivity(new Intent(UploadActivity.this,MapsActivity.class));
                                     } catch (Exception e) {
                                         e.printStackTrace();
+                                        Extensions.show(UploadActivity.this,e.getMessage());
                                     }
                                 }
 
@@ -110,6 +125,7 @@ public class UploadActivity extends AppCompatActivity {
 
                         } catch (Exception ex) {
                             ex.printStackTrace();
+                            Extensions.show(UploadActivity.this,ex.getMessage());
                         }
                     } else {
                         Extensions.show(this, "Error with input data");
